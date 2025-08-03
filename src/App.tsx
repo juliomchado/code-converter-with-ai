@@ -24,7 +24,6 @@ import { ConversionService } from "./services/conversionService";
 import { ApiValidationService } from "./services/apiValidationService";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import type { Language } from "./types";
-import { Analytics } from "@vercel/analytics/next"
 
 function App() {
   const [sourceCode, setSourceCode] = useState("");
@@ -71,8 +70,8 @@ function App() {
   });
 
   useEffect(() => {
-    console.log('Alguém entrou')
-  }, [])
+    console.log("Alguém entrou");
+  }, []);
 
   const handleConvert = async () => {
     if (!sourceCode.trim() || !sourceLanguage || !targetLanguage) {
@@ -491,7 +490,7 @@ function App() {
           removeNotification={removeNotification}
         />
       </div>
-      <Analytics/>
+      <Analytics />
     </ThemeProvider>
   );
 }
