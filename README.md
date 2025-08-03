@@ -6,6 +6,12 @@ An intelligent AI-powered code conversion tool that transforms code between 25+ 
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
+
+<img width="1904" height="831" alt="image" src="https://github.com/user-attachments/assets/5ee18c22-7d37-4e84-bd6a-3116eaa6c756" />
+<img width="1910" height="949" alt="image" src="https://github.com/user-attachments/assets/e12fb211-2f7d-458b-b549-63ffd81dccda" />
+<img width="1901" height="948" alt="image" src="https://github.com/user-attachments/assets/e8da8c8d-95f7-42da-8d74-ec7c02d686f7" />
+
+
 ## ✨ Features
 
 - 🔄 **AI-Powered Conversion** - Convert between 25+ programming languages instantly
