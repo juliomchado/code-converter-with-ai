@@ -490,7 +490,6 @@ function App() {
           removeNotification={removeNotification}
         />
       </div>
-      <Analytics />
     </ThemeProvider>
   );
 }
