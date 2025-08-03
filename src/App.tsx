@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Code2,
   Loader2,
@@ -24,6 +24,7 @@ import { ConversionService } from "./services/conversionService";
 import { ApiValidationService } from "./services/apiValidationService";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import type { Language } from "./types";
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
   const [sourceCode, setSourceCode] = useState("");
@@ -33,6 +34,7 @@ function App() {
   const [isConverting, setIsConverting] = useState(false);
   const [currentProvider, setCurrentProvider] = useState<string>("gemini");
   const [error, setError] = useState<string | null>(null);
+  const [count, setCount] = useState(0);
 
   // Notification system
   const [notifications, setNotifications] = useState<
@@ -68,6 +70,10 @@ function App() {
     }
     return defaultKeys;
   });
+
+  useEffect(() => {
+    console.log('Alguém entrou')
+  }, [])
 
   const handleConvert = async () => {
     if (!sourceCode.trim() || !sourceLanguage || !targetLanguage) {
@@ -486,6 +492,7 @@ function App() {
           removeNotification={removeNotification}
         />
       </div>
+      <Analytics/>
     </ThemeProvider>
   );
 }
