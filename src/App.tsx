@@ -34,7 +34,6 @@ function App() {
   const [isConverting, setIsConverting] = useState(false);
   const [currentProvider, setCurrentProvider] = useState<string>("gemini");
   const [error, setError] = useState<string | null>(null);
-  const [count, setCount] = useState(0);
 
   // Notification system
   const [notifications, setNotifications] = useState<
