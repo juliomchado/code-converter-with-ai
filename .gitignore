@@ -35,6 +35,8 @@ config/production.json
 *.njsproj
 *.sln
 *.sw?
+.SECURITY.md
+PROJECT_README.md
 
 # OS generated files
 Thumbs.db

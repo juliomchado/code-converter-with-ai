@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  ArrowRight,
   Code2,
   Loader2,
   AlertCircle,
@@ -32,11 +31,13 @@ function App() {
   const [sourceLanguage, setSourceLanguage] = useState<Language | null>(null);
   const [targetLanguage, setTargetLanguage] = useState<Language | null>(null);
   const [isConverting, setIsConverting] = useState(false);
-  const [currentProvider, setCurrentProvider] = useState<string>('gemini');
+  const [currentProvider, setCurrentProvider] = useState<string>("gemini");
   const [error, setError] = useState<string | null>(null);
-  
+
   // Notification system
-  const [notifications, setNotifications] = useState<Array<NotificationProps & { id: string }>>([]);
+  const [notifications, setNotifications] = useState<
+    Array<NotificationProps & { id: string }>
+  >([]);
 
   // API Key states
   const [showApiSettings, setShowApiSettings] = useState(false);
@@ -45,7 +46,7 @@ function App() {
   >("gemini");
   const [apiKeys, setApiKeys] = useState(() => {
     // Load API keys from localStorage on init
-    const saved = localStorage.getItem('codeconverter-api-keys');
+    const saved = localStorage.getItem("codeconverter-api-keys");
     const defaultKeys = {
       gemini: "",
       openrouter: "",
@@ -53,7 +54,7 @@ function App() {
       claude: "",
       openai: "",
     };
-    
+
     if (saved) {
       const parsed = JSON.parse(saved);
       // Ensure all values are strings
@@ -71,24 +72,26 @@ function App() {
   const handleConvert = async () => {
     if (!sourceCode.trim() || !sourceLanguage || !targetLanguage) {
       addNotification({
-        type: 'error',
-        title: 'Missing Information',
-        message: 'Please enter code and select both source and target languages'
+        type: "error",
+        title: "Missing Information",
+        message:
+          "Please enter code and select both source and target languages",
       });
       return;
     }
 
     if (sourceLanguage.id === targetLanguage.id) {
       addNotification({
-        type: 'error',
-        title: 'Invalid Selection',
-        message: 'Source and target languages cannot be the same'
+        type: "error",
+        title: "Invalid Selection",
+        message: "Source and target languages cannot be the same",
       });
       return;
     }
 
     // Determine which provider to use based on available keys
-    const availableProvider = Object.entries(apiKeys).find(([key, value]) => value.trim())?.[0] || 'gemini';
+    const availableProvider =
+      Object.entries(apiKeys).find(([value]) => value.trim())?.[0] || "gemini";
     setCurrentProvider(availableProvider);
 
     setError(null);
@@ -108,25 +111,25 @@ function App() {
       if (result.error) {
         setError(result.error);
         addNotification({
-          type: 'error',
-          title: 'Conversion Failed',
-          message: result.error
+          type: "error",
+          title: "Conversion Failed",
+          message: result.error,
         });
       } else {
         setConvertedCode(result.convertedCode);
         addNotification({
-          type: 'success',
-          title: 'Conversion Complete',
-          message: `Successfully converted ${sourceLanguage.name} to ${targetLanguage.name}`
+          type: "success",
+          title: "Conversion Complete",
+          message: `Successfully converted ${sourceLanguage.name} to ${targetLanguage.name}`,
         });
       }
     } catch (err) {
       const errorMessage = "Failed to convert code. Please try again.";
       setError(errorMessage);
       addNotification({
-        type: 'error',
-        title: 'Conversion Error',
-        message: errorMessage
+        type: "error",
+        title: "Conversion Error",
+        message: errorMessage,
       });
     } finally {
       setIsConverting(false);
@@ -142,62 +145,71 @@ function App() {
     const newKeys = { ...apiKeys, [provider]: key };
     setApiKeys(newKeys);
     // Save to localStorage immediately
-    localStorage.setItem('codeconverter-api-keys', JSON.stringify(newKeys));
+    localStorage.setItem("codeconverter-api-keys", JSON.stringify(newKeys));
   };
 
   // Notification functions
-  const addNotification = (notification: Omit<NotificationProps, 'onClose'>) => {
+  const addNotification = (
+    notification: Omit<NotificationProps, "onClose">
+  ) => {
     const id = Date.now().toString();
-    setNotifications(prev => [...prev, { ...notification, id, onClose: () => {} }]);
+    setNotifications((prev) => [
+      ...prev,
+      { ...notification, id, onClose: () => {} },
+    ]);
   };
 
   const removeNotification = (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
   const saveApiKeys = async () => {
     const currentKey = apiKeys[activeApiProvider];
-    
+
     if (!currentKey.trim()) {
       addNotification({
-        type: 'error',
-        title: 'Validation Failed',
-        message: 'Please enter an API key before saving.'
+        type: "error",
+        title: "Validation Failed",
+        message: "Please enter an API key before saving.",
       });
       return;
     }
 
     // Validate API key
     addNotification({
-      type: 'info',
-      title: 'Validating API Key',
-      message: 'Checking your API key...'
+      type: "info",
+      title: "Validating API Key",
+      message: "Checking your API key...",
     });
 
     try {
-      const validation = await ApiValidationService.validateApiKey(activeApiProvider, currentKey);
-      
+      const validation = await ApiValidationService.validateApiKey(
+        activeApiProvider,
+        currentKey
+      );
+
       if (validation.isValid) {
-        localStorage.setItem('codeconverter-api-keys', JSON.stringify(apiKeys));
+        localStorage.setItem("codeconverter-api-keys", JSON.stringify(apiKeys));
         setError(null);
-        
+
         addNotification({
-          type: 'success',
-          title: 'API Key Validated',
-          message: `${validation.providerInfo?.name} API key is valid and ready to use!`
+          type: "success",
+          title: "API Key Validated",
+          message: `${validation.providerInfo?.name} API key is valid and ready to use!`,
         });
       } else {
         addNotification({
-          type: 'error',
-          title: 'Invalid API Key',
-          message: validation.error || 'API key validation failed'
+          type: "error",
+          title: "Invalid API Key",
+          message: validation.error || "API key validation failed",
         });
       }
     } catch (error) {
       addNotification({
-        type: 'error',
-        title: 'Validation Error',
-        message: 'Unable to validate API key. Please check your internet connection.'
+        type: "error",
+        title: "Validation Error",
+        message:
+          "Unable to validate API key. Please check your internet connection.",
       });
     }
   };
@@ -308,12 +320,9 @@ function App() {
                   onApiKeyChange={(key) => updateApiKey(activeApiProvider, key)}
                   provider={activeApiProvider}
                 />
-                
+
                 <div className="api-save-section">
-                  <button 
-                    onClick={saveApiKeys}
-                    className="api-save-button"
-                  >
+                  <button onClick={saveApiKeys} className="api-save-button">
                     Save API Keys
                   </button>
                   <div className="api-security-info">
@@ -321,7 +330,8 @@ function App() {
                       🔒 Keys are saved locally in your browser only
                     </p>
                     <p className="api-security-warning">
-                      ℹ️ Privacy: Your API keys never leave your browser. All AI requests go directly to the providers.
+                      ℹ️ Privacy: Your API keys never leave your browser. All AI
+                      requests go directly to the providers.
                     </p>
                   </div>
                 </div>
@@ -367,13 +377,13 @@ function App() {
                   <div className="code-actions">
                     <div className="code-actions-left">
                       <span className="panel-subtitle">
-                        {sourceLanguage?.name || 'Select language'}
+                        {sourceLanguage?.name || "Select language"}
                       </span>
                     </div>
                     <div className="code-actions-right">
                       <FormatButton
                         code={sourceCode}
-                        language={sourceLanguage?.name || ''}
+                        language={sourceLanguage?.name || ""}
                         onFormatted={setSourceCode}
                       />
                       <CopyButton text={sourceCode} size="sm" />
@@ -411,13 +421,13 @@ function App() {
                   <div className="code-actions">
                     <div className="code-actions-left">
                       <span className="panel-subtitle">
-                        {targetLanguage?.name || 'Select language'}
+                        {targetLanguage?.name || "Select language"}
                       </span>
                     </div>
                     <div className="code-actions-right">
                       <FormatButton
                         code={convertedCode}
-                        language={targetLanguage?.name || ''}
+                        language={targetLanguage?.name || ""}
                         onFormatted={setConvertedCode}
                       />
                       <CopyButton text={convertedCode} size="sm" />
@@ -465,7 +475,7 @@ function App() {
         </div>
 
         {/* Converting Progress Overlay */}
-        <ConvertingProgress 
+        <ConvertingProgress
           isConverting={isConverting}
           currentProvider={currentProvider}
         />

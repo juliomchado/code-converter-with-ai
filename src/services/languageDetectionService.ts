@@ -10,8 +10,8 @@ interface LanguagePattern {
 export class LanguageDetectionService {
   private static readonly languages: LanguagePattern[] = [
     {
-      id: 'javascript',
-      name: 'JavaScript',
+      id: "javascript",
+      name: "JavaScript",
       patterns: [
         /\bfunction\s+\w+\s*\(/,
         /\bconst\s+\w+\s*=/,
@@ -21,15 +21,31 @@ export class LanguageDetectionService {
         /console\.log\(/,
         /require\(['"`]/,
         /import.*from\s+['"`]/,
-        /export\s+(default\s+)?/
+        /export\s+(default\s+)?/,
       ],
-      keywords: ['const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while', 'class', 'extends', 'import', 'export', 'async', 'await'],
-      extensions: ['js', 'mjs'],
-      confidence: 0
+      keywords: [
+        "const",
+        "let",
+        "var",
+        "function",
+        "return",
+        "if",
+        "else",
+        "for",
+        "while",
+        "class",
+        "extends",
+        "import",
+        "export",
+        "async",
+        "await",
+      ],
+      extensions: ["js", "mjs"],
+      confidence: 0,
     },
     {
-      id: 'typescript',
-      name: 'TypeScript',
+      id: "typescript",
+      name: "TypeScript",
       patterns: [
         /:\s*(string|number|boolean|any|void|object)\b/,
         /interface\s+\w+/,
@@ -39,15 +55,25 @@ export class LanguageDetectionService {
         /\bexport\s+type/,
         /\bimport\s+type/,
         /<.*>\s*\(/,
-        /as\s+\w+/
+        /as\s+\w+/,
       ],
-      keywords: ['interface', 'type', 'enum', 'namespace', 'declare', 'readonly', 'private', 'public', 'protected'],
-      extensions: ['ts', 'tsx'],
-      confidence: 0
+      keywords: [
+        "interface",
+        "type",
+        "enum",
+        "namespace",
+        "declare",
+        "readonly",
+        "private",
+        "public",
+        "protected",
+      ],
+      extensions: ["ts", "tsx"],
+      confidence: 0,
     },
     {
-      id: 'python',
-      name: 'Python',
+      id: "python",
+      name: "Python",
       patterns: [
         /^def\s+\w+\s*\(/m,
         /^class\s+\w+/m,
@@ -57,15 +83,32 @@ export class LanguageDetectionService {
         /print\s*\(/,
         /:\s*$/m,
         /\bself\b/,
-        /^\s*#/m
+        /^\s*#/m,
       ],
-      keywords: ['def', 'class', 'import', 'from', 'if', 'elif', 'else', 'for', 'while', 'try', 'except', 'finally', 'with', 'as', 'lambda', 'yield'],
-      extensions: ['py', 'pyw'],
-      confidence: 0
+      keywords: [
+        "def",
+        "class",
+        "import",
+        "from",
+        "if",
+        "elif",
+        "else",
+        "for",
+        "while",
+        "try",
+        "except",
+        "finally",
+        "with",
+        "as",
+        "lambda",
+        "yield",
+      ],
+      extensions: ["py", "pyw"],
+      confidence: 0,
     },
     {
-      id: 'java',
-      name: 'Java',
+      id: "java",
+      name: "Java",
       patterns: [
         /public\s+class\s+\w+/,
         /public\s+static\s+void\s+main/,
@@ -75,15 +118,28 @@ export class LanguageDetectionService {
         /\bprotected\s+(static\s+)?[\w<>]+\s+\w+/,
         /\bpackage\s+[\w.]+/,
         /\bimport\s+[\w.]+/,
-        /@\w+/
+        /@\w+/,
       ],
-      keywords: ['public', 'private', 'protected', 'class', 'interface', 'extends', 'implements', 'package', 'import', 'static', 'final', 'abstract'],
-      extensions: ['java'],
-      confidence: 0
+      keywords: [
+        "public",
+        "private",
+        "protected",
+        "class",
+        "interface",
+        "extends",
+        "implements",
+        "package",
+        "import",
+        "static",
+        "final",
+        "abstract",
+      ],
+      extensions: ["java"],
+      confidence: 0,
     },
     {
-      id: 'cpp',
-      name: 'C++',
+      id: "cpp",
+      name: "C++",
       patterns: [
         /#include\s*<.*>/,
         /using\s+namespace\s+std/,
@@ -93,15 +149,27 @@ export class LanguageDetectionService {
         /\bpublic\s*:|private\s*:|protected\s*:/,
         /\bvirtual\s+/,
         /\btemplate\s*</,
-        /::/
+        /::/,
       ],
-      keywords: ['class', 'public', 'private', 'protected', 'virtual', 'template', 'namespace', 'using', 'const', 'static', 'inline'],
-      extensions: ['cpp', 'cxx', 'cc', 'c++'],
-      confidence: 0
+      keywords: [
+        "class",
+        "public",
+        "private",
+        "protected",
+        "virtual",
+        "template",
+        "namespace",
+        "using",
+        "const",
+        "static",
+        "inline",
+      ],
+      extensions: ["cpp", "cxx", "cc", "c++"],
+      confidence: 0,
     },
     {
-      id: 'c',
-      name: 'C',
+      id: "c",
+      name: "C",
       patterns: [
         /#include\s*<.*\.h>/,
         /\bmain\s*\(\s*(void\s*)?\)\s*{/,
@@ -110,15 +178,25 @@ export class LanguageDetectionService {
         /\bmalloc\s*\(/,
         /\bfree\s*\(/,
         /struct\s+\w+\s*{/,
-        /typedef\s+(struct\s+)?\w+/
+        /typedef\s+(struct\s+)?\w+/,
       ],
-      keywords: ['struct', 'typedef', 'static', 'extern', 'const', 'volatile', 'register', 'auto', 'sizeof'],
-      extensions: ['c', 'h'],
-      confidence: 0
+      keywords: [
+        "struct",
+        "typedef",
+        "static",
+        "extern",
+        "const",
+        "volatile",
+        "register",
+        "auto",
+        "sizeof",
+      ],
+      extensions: ["c", "h"],
+      confidence: 0,
     },
     {
-      id: 'csharp',
-      name: 'C#',
+      id: "csharp",
+      name: "C#",
       patterns: [
         /using\s+System/,
         /namespace\s+\w+/,
@@ -127,15 +205,26 @@ export class LanguageDetectionService {
         /\[.*\]/,
         /\bpublic\s+(static\s+)?[\w<>]+\s+\w+\s*\(/,
         /\bvar\s+\w+\s*=/,
-        /\bstring\s+\w+/
+        /\bstring\s+\w+/,
       ],
-      keywords: ['namespace', 'using', 'class', 'interface', 'struct', 'enum', 'delegate', 'event', 'var', 'dynamic'],
-      extensions: ['cs'],
-      confidence: 0
+      keywords: [
+        "namespace",
+        "using",
+        "class",
+        "interface",
+        "struct",
+        "enum",
+        "delegate",
+        "event",
+        "var",
+        "dynamic",
+      ],
+      extensions: ["cs"],
+      confidence: 0,
     },
     {
-      id: 'php',
-      name: 'PHP',
+      id: "php",
+      name: "PHP",
       patterns: [
         /<\?php/,
         /\$\w+/,
@@ -145,15 +234,27 @@ export class LanguageDetectionService {
         /class\s+\w+/,
         /\barray\s*\(/,
         /->/,
-        /::/
+        /::/,
       ],
-      keywords: ['echo', 'print', 'var', 'function', 'class', 'extends', 'implements', 'public', 'private', 'protected', 'static'],
-      extensions: ['php'],
-      confidence: 0
+      keywords: [
+        "echo",
+        "print",
+        "var",
+        "function",
+        "class",
+        "extends",
+        "implements",
+        "public",
+        "private",
+        "protected",
+        "static",
+      ],
+      extensions: ["php"],
+      confidence: 0,
     },
     {
-      id: 'go',
-      name: 'Go',
+      id: "go",
+      name: "Go",
       patterns: [
         /package\s+main/,
         /import\s+"fmt"/,
@@ -162,15 +263,28 @@ export class LanguageDetectionService {
         /fmt\.Print/,
         /:=/,
         /\bgo\s+\w+\s*\(/,
-        /chan\s+\w+/
+        /chan\s+\w+/,
       ],
-      keywords: ['package', 'import', 'func', 'var', 'const', 'type', 'struct', 'interface', 'map', 'chan', 'go', 'defer'],
-      extensions: ['go'],
-      confidence: 0
+      keywords: [
+        "package",
+        "import",
+        "func",
+        "var",
+        "const",
+        "type",
+        "struct",
+        "interface",
+        "map",
+        "chan",
+        "go",
+        "defer",
+      ],
+      extensions: ["go"],
+      confidence: 0,
     },
     {
-      id: 'rust',
-      name: 'Rust',
+      id: "rust",
+      name: "Rust",
       patterns: [
         /fn\s+main\s*\(\s*\)/,
         /fn\s+\w+\s*\(/,
@@ -180,15 +294,31 @@ export class LanguageDetectionService {
         /struct\s+\w+\s*{/,
         /impl\s+\w+/,
         /match\s+\w+\s*{/,
-        /&\w+/
+        /&\w+/,
       ],
-      keywords: ['fn', 'let', 'mut', 'const', 'static', 'struct', 'enum', 'impl', 'trait', 'match', 'if', 'else', 'loop', 'while', 'for'],
-      extensions: ['rs'],
-      confidence: 0
+      keywords: [
+        "fn",
+        "let",
+        "mut",
+        "const",
+        "static",
+        "struct",
+        "enum",
+        "impl",
+        "trait",
+        "match",
+        "if",
+        "else",
+        "loop",
+        "while",
+        "for",
+      ],
+      extensions: ["rs"],
+      confidence: 0,
     },
     {
-      id: 'ruby',
-      name: 'Ruby',
+      id: "ruby",
+      name: "Ruby",
       patterns: [
         /def\s+\w+/,
         /class\s+\w+/,
@@ -198,15 +328,31 @@ export class LanguageDetectionService {
         /\brequire\s+['"`]/,
         /@\w+/,
         /\|\w+\|/,
-        /=>/
+        /=>/,
       ],
-      keywords: ['def', 'class', 'module', 'end', 'if', 'elsif', 'else', 'unless', 'while', 'until', 'for', 'do', 'begin', 'rescue', 'ensure'],
-      extensions: ['rb'],
-      confidence: 0
+      keywords: [
+        "def",
+        "class",
+        "module",
+        "end",
+        "if",
+        "elsif",
+        "else",
+        "unless",
+        "while",
+        "until",
+        "for",
+        "do",
+        "begin",
+        "rescue",
+        "ensure",
+      ],
+      extensions: ["rb"],
+      confidence: 0,
     },
     {
-      id: 'swift',
-      name: 'Swift',
+      id: "swift",
+      name: "Swift",
       patterns: [
         /import\s+Foundation/,
         /import\s+UIKit/,
@@ -216,15 +362,30 @@ export class LanguageDetectionService {
         /class\s+\w+:/,
         /struct\s+\w+\s*{/,
         /print\s*\(/,
-        /\?\s*\w+/
+        /\?\s*\w+/,
       ],
-      keywords: ['import', 'class', 'struct', 'enum', 'func', 'var', 'let', 'if', 'else', 'for', 'while', 'switch', 'case', 'default'],
-      extensions: ['swift'],
-      confidence: 0
+      keywords: [
+        "import",
+        "class",
+        "struct",
+        "enum",
+        "func",
+        "var",
+        "let",
+        "if",
+        "else",
+        "for",
+        "while",
+        "switch",
+        "case",
+        "default",
+      ],
+      extensions: ["swift"],
+      confidence: 0,
     },
     {
-      id: 'kotlin',
-      name: 'Kotlin',
+      id: "kotlin",
+      name: "Kotlin",
       patterns: [
         /fun\s+main\s*\(/,
         /fun\s+\w+\s*\(/,
@@ -234,28 +395,42 @@ export class LanguageDetectionService {
         /println\s*\(/,
         /package\s+[\w.]+/,
         /import\s+[\w.]+/,
-        /\?\s*\w+/
+        /\?\s*\w+/,
       ],
-      keywords: ['fun', 'val', 'var', 'class', 'object', 'interface', 'package', 'import', 'if', 'else', 'when', 'for', 'while'],
-      extensions: ['kt', 'kts'],
-      confidence: 0
+      keywords: [
+        "fun",
+        "val",
+        "var",
+        "class",
+        "object",
+        "interface",
+        "package",
+        "import",
+        "if",
+        "else",
+        "when",
+        "for",
+        "while",
+      ],
+      extensions: ["kt", "kts"],
+      confidence: 0,
     },
     {
-      id: 'json',
-      name: 'JSON',
+      id: "json",
+      name: "JSON",
       patterns: [
         /^\s*{[\s\S]*}\s*$/,
         /^\s*\[[\s\S]*\]\s*$/,
         /"[\w\s-]+"\s*:\s*[\{\[\"]|[\d\.\-]|true|false|null/,
-        /"\w+":\s*"/
+        /"\w+":\s*"/,
       ],
-      keywords: ['true', 'false', 'null'],
-      extensions: ['json'],
-      confidence: 0
+      keywords: ["true", "false", "null"],
+      extensions: ["json"],
+      confidence: 0,
     },
     {
-      id: 'html',
-      name: 'HTML',
+      id: "html",
+      name: "HTML",
       patterns: [
         /<html.*>/i,
         /<head.*>/i,
@@ -265,30 +440,52 @@ export class LanguageDetectionService {
         /<style.*>/i,
         /<!DOCTYPE\s+html>/i,
         /<\/\w+>/,
-        /<\w+[^>]*\/>/
+        /<\w+[^>]*\/>/,
       ],
-      keywords: ['html', 'head', 'body', 'div', 'span', 'script', 'style', 'title', 'meta', 'link'],
-      extensions: ['html', 'htm'],
-      confidence: 0
+      keywords: [
+        "html",
+        "head",
+        "body",
+        "div",
+        "span",
+        "script",
+        "style",
+        "title",
+        "meta",
+        "link",
+      ],
+      extensions: ["html", "htm"],
+      confidence: 0,
     },
     {
-      id: 'css',
-      name: 'CSS',
+      id: "css",
+      name: "CSS",
       patterns: [
         /\.[a-zA-Z][\w-]*\s*{/,
         /#[a-zA-Z][\w-]*\s*{/,
         /[a-zA-Z][\w-]*\s*:\s*[^;]+;/,
         /@media\s+/,
         /@import\s+/,
-        /\w+\s*:\s*\w+\s*(!important)?;/
+        /\w+\s*:\s*\w+\s*(!important)?;/,
       ],
-      keywords: ['color', 'background', 'font', 'margin', 'padding', 'border', 'width', 'height', 'display', 'position'],
-      extensions: ['css'],
-      confidence: 0
+      keywords: [
+        "color",
+        "background",
+        "font",
+        "margin",
+        "padding",
+        "border",
+        "width",
+        "height",
+        "display",
+        "position",
+      ],
+      extensions: ["css"],
+      confidence: 0,
     },
     {
-      id: 'sql',
-      name: 'SQL',
+      id: "sql",
+      name: "SQL",
       patterns: [
         /\bSELECT\s+.*\bFROM\b/i,
         /\bINSERT\s+INTO\b/i,
@@ -297,17 +494,34 @@ export class LanguageDetectionService {
         /\bCREATE\s+TABLE\b/i,
         /\bALTER\s+TABLE\b/i,
         /\bWHERE\s+/i,
-        /\bJOIN\s+/i
+        /\bJOIN\s+/i,
       ],
-      keywords: ['SELECT', 'FROM', 'WHERE', 'INSERT', 'UPDATE', 'DELETE', 'CREATE', 'ALTER', 'DROP', 'TABLE', 'INDEX', 'JOIN'],
-      extensions: ['sql'],
-      confidence: 0
-    }
+      keywords: [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "CREATE",
+        "ALTER",
+        "DROP",
+        "TABLE",
+        "INDEX",
+        "JOIN",
+      ],
+      extensions: ["sql"],
+      confidence: 0,
+    },
   ];
 
-  static detectLanguage(code: string): { language: string; confidence: number; suggestions: Array<{ name: string; confidence: number }> } {
+  static detectLanguage(code: string): {
+    language: string;
+    confidence: number;
+    suggestions: Array<{ name: string; confidence: number }>;
+  } {
     if (!code || code.trim().length < 10) {
-      return { language: 'unknown', confidence: 0, suggestions: [] };
+      return { language: "unknown", confidence: 0, suggestions: [] };
     }
 
     const results: Array<{ name: string; confidence: number }> = [];
@@ -341,7 +555,7 @@ export class LanguageDetectionService {
 
       // Calculate confidence as percentage
       const confidence = Math.min(100, score);
-      
+
       if (confidence > 0) {
         results.push({ name: lang.name, confidence });
       }
@@ -352,13 +566,14 @@ export class LanguageDetectionService {
 
     // Return best match or unknown
     const bestMatch = results[0];
-    const language = bestMatch && bestMatch.confidence > 20 ? bestMatch.name : 'unknown';
+    const language =
+      bestMatch && bestMatch.confidence > 20 ? bestMatch.name : "unknown";
     const confidence = bestMatch ? bestMatch.confidence : 0;
 
     return {
       language,
       confidence,
-      suggestions: results.slice(0, 3) // Top 3 suggestions
+      suggestions: results.slice(0, 3), // Top 3 suggestions
     };
   }
 
